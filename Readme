@@ -1,0 +1,47 @@
+1. Upload the Zip to Lambda
+Go to the Lambda Console → select your function (mylambda) or create a new one.
+
+Under Code → Upload from → .zip file, choose projectfunction.zip.
+
+Set the Handler to lambda_function.lambda_handler (assuming your entry function is lambda_handler inside lambda_function.py).
+
+Runtime: Python 3.x.
+
+2. Configure IAM Role
+Attach an execution role with:
+
+AWSLambdaBasicExecutionRole (for logs).
+
+DynamoDB access (scoped to your table ContactFormData).
+
+3. DynamoDB Table
+Table name: ContactFormData.
+
+Partition key: email (String).
+
+This means every record is keyed by the user’s email.
+
+4. API Gateway Integration
+In API Gateway Console, create a resource /contact.
+
+Add a POST method → integrate with your Lambda.
+
+Deploy to stage dev.
+
+Invoke URL will look like:
+
+Code
+https://tge4qpx2xe.execute-api.us-east-1.amazonaws.com/dev/contact
+5. Frontend Pages
+contactus.html → form should POST to the API Gateway endpoint.
+
+success.html → redirect after submission.
+
+⚡ AWS CLI Shortcut (Optional)
+If you prefer command line instead of console:
+
+bash
+aws lambda update-function-code \
+  --function-name mylambda \
+  --zip-file fileb://projectfunction.zip
+This uploads your zip directly to the Lambda function.
