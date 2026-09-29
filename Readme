@@ -1,4 +1,4 @@
-1. Upload the Zip to Lambda
+ Upload the Zip to Lambda
 Go to the Lambda Console → select your function (mylambda) or create a new one.
 
 Under Code → Upload from → .zip file, choose projectfunction.zip.
